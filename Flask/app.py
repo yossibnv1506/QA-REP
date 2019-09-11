@@ -10,20 +10,27 @@ def student():
 @app.route('/result',methods = ['POST', 'GET'])
 def result():
    if request.method == 'POST':
-      result = request.form["User_Id"]
-      user = (collection.find_one({"User_Id": str(result)}))
+      result = request.form["userId"]
+      users = collection.find({"userId": str(result)})
+      res= {}
+      for user1 in users:
+          res[user1['msg']]= user1['userId']
+      print(res)
       if user is not None:
-            return render_template("result.html",result = user)
+            return render_template("result.html",result = res)
 
 client = MongoClient()
 db = client.test_database
 collection = db.Users
-Users = [{"User_Id" : "Yuval", "Message" : "dev"}, {"User_Id" : "Lidor", "Message" : "devops"}, {"User_Id" : "Tamir", "Message" : "dev"}]
+Users = [{ "msg" : "dev", "userId" : "Yuval"}, {"msg" : "devops", "userId" : "Lidor"}, {"msg" : "dev", "userId" : "Tamir"},{"msg" : "deviiiiiii", "userId": "Tamir"} ]
+
 x = collection.insert_many(Users)
 collist = db.list_collection_names()
 
-
+user = (collection.find({"userId": "Tamir"}))
+print(user, 55555555555)
 if __name__ == '__main__':
+    app.debug=True
     app.run()
 
 
