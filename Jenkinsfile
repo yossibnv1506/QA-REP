@@ -24,7 +24,7 @@ def NextVersion
                      
                      dir('INT_WEB') {
                          deleteDir()
-                         checkout([$class: 'GitSCM', branches: [[name: 'Dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git-cred-id', url: "https://github.com/intclassproject/INT_API.git"]]])
+                         checkout([$class: 'GitSCM', branches: [[name: 'Dev']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'git-cred-id', url: "https://github.com/intclassproject/INT_WEB.git"]]])
                          Commit_Id = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
                          BuildVersion = Current_version + '_' + Commit_Id
                          println("Checking the build version: $BuildVersion")
