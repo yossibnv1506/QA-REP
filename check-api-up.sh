@@ -1,10 +1,7 @@
 #!/bin/bash
 url =$1
-echo $url
-ip = $2
-echo $ip 
-
- STATUS=$(curl -s -o /dev/null -w '%{http_code}' $url$ip)
+ip = ":"$2
+STATUS=$(curl -s -o /dev/null -w '%{http_code}' $url$ip)
   if [ $STATUS -eq 200 ]; then
     echo "Got 200! All done!"
 #    exit 0 
